@@ -20,14 +20,25 @@ if [[ -z "$DUMP" || ! -f "$DUMP" ]]; then
 fi
 
 # Compose treats a bare filename as a *named volume*, so always pass a full path.
+# Compose ships either as a docker plugin ("docker compose") or as a standalone
+# binary ("docker-compose"); the build server has the latter.
+if docker compose version >/dev/null 2>&1; then
+  COMPOSE="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  COMPOSE="docker-compose"
+else
+  echo "neither 'docker compose' nor 'docker-compose' is available" >&2
+  exit 3
+fi
+
 export QANDA_DUMP="$(cd "$(dirname "$DUMP")" && pwd)/$(basename "$DUMP")"
 export HOST_UID="$(id -u)" HOST_GID="$(id -g)"
 
 echo "==> capturing images and rendering site from $DUMP"
-docker compose --profile build up --build --exit-code-from generate generate
+$COMPOSE --profile build up --build --exit-code-from generate generate
 
 echo "==> removing the throwaway database"
-docker compose --profile build down -v
+$COMPOSE --profile build down -v
 
 echo "==> building image $TAG"
 docker build -f Dockerfile.serve -t "$TAG" .
