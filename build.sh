@@ -34,8 +34,13 @@ fi
 export QANDA_DUMP="$(cd "$(dirname "$DUMP")" && pwd)/$(basename "$DUMP")"
 export HOST_UID="$(id -u)" HOST_GID="$(id -g)"
 
+echo "==> building the generator images"
+# Build every build-profile image up front: "up --build <service>" only builds the
+# named service, leaving its dependencies without an image on a clean machine.
+$COMPOSE --profile build build
+
 echo "==> capturing images and rendering site from $DUMP"
-$COMPOSE --profile build up --build --exit-code-from generate generate
+$COMPOSE --profile build up --exit-code-from generate generate
 
 echo "==> removing the throwaway database"
 $COMPOSE --profile build down -v
