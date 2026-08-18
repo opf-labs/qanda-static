@@ -34,6 +34,10 @@ fi
 export QANDA_DUMP="$(cd "$(dirname "$DUMP")" && pwd)/$(basename "$DUMP")"
 export HOST_UID="$(id -u)" HOST_GID="$(id -g)"
 
+# Docker creates a missing bind-mount source as root, which the generator (running
+# as the host user) then cannot write to. Create them first.
+mkdir -p site assets/avatars assets/media
+
 # A database container left behind by an interrupted run already has an
 # initialised data directory, and MariaDB only imports the dump into an empty
 # one, so always start from a clean database.
