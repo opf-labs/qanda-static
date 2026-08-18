@@ -65,6 +65,11 @@ docker compose up -d web                                  # preview on :8088
 `extract` is idempotent, so re-running only fetches what is missing. `generate` depends
 on `extract` completing. Both run as `HOST_UID`/`HOST_GID` so output is not root-owned.
 
+On older hosts, set `QANDA_DB_IMAGE` in `.env`: MariaDB 11 needs a newer kernel than
+Debian 9's 4.9 and exits with `Can't initialize timers` there, where `mariadb:10.5` is
+the newest tag that starts. Compose may also be the standalone `docker-compose` binary
+rather than a `docker compose` plugin; `build.sh` detects either.
+
 Without Docker, against any reachable MySQL/MariaDB holding the dump:
 
 ```bash

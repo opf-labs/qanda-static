@@ -36,7 +36,10 @@ services:
       - web
 
   db:
-    image: mariadb:11
+    # Override on hosts too old for the current image: MariaDB 11 needs a newer
+    # kernel than Debian 9's 4.9 and dies with "Can't initialize timers" there.
+    # The build server sets QANDA_DB_IMAGE=mariadb:10.5 in its .env.
+    image: ${QANDA_DB_IMAGE:-mariadb:11}
     profiles: ["build"]
     environment:
       MARIADB_ROOT_PASSWORD: root
