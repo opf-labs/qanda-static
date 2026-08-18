@@ -34,6 +34,12 @@ fi
 export QANDA_DUMP="$(cd "$(dirname "$DUMP")" && pwd)/$(basename "$DUMP")"
 export HOST_UID="$(id -u)" HOST_GID="$(id -g)"
 
+# A database container left behind by an interrupted run already has an
+# initialised data directory, and MariaDB only imports the dump into an empty
+# one, so always start from a clean database.
+echo "==> clearing any previous build containers"
+$COMPOSE --profile build down -v --remove-orphans >/dev/null 2>&1 || true
+
 echo "==> building the generator images"
 # Build every build-profile image up front: "up --build <service>" only builds the
 # named service, leaving its dependencies without an image on a clean machine.
