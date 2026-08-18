@@ -116,7 +116,14 @@ an address the archive otherwise withholds. Caching keeps that hash out of the H
 entirely. The trade-off: cached pictures are frozen as at capture.
 
 An image the extractor cannot fetch keeps its original external URL rather than pointing
-at a file that does not exist.
+at a file that does not exist. Hosts do rate-limit: the build server gets HTTP 429 from
+imgur, so two post images could not be captured there. `assets/` is ordinary content, so
+seed it from a machine that did capture them and rebuild - `extract` skips anything
+already present:
+
+```bash
+rsync -av assets/media/ user@buildhost:/path/to/qanda-static/assets/media/
+```
 
 ## Handling a removal request (site administrators)
 
