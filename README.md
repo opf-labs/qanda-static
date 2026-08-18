@@ -205,6 +205,8 @@ tests/                 unit tests and a synthetic-fixture end-to-end build
 
 ## Licence
 
-Archive content carries the CC BY-SA 4.0 notice shown in the site footer, as on the
-original site. No licence has been set for the generator code yet - add a `LICENSE` file
-to settle it.
+The generator code is licensed under the [Apache License 2.0](LICENSE), Copyright 2026
+Open Preservation Foundation (see [NOTICE](NOTICE)).
+
+Archive content produced by this tool is separate: it carries the CC BY-SA 4.0 notice
+shown in the site footer, as on the original site.
