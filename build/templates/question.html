@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ q.title|e }}{% endblock %}
+{% block breadcrumbs %}
+<nav class="breadcrumbs">
+  <a href="{{ root }}index.html">Questions</a><span class="bc-sep">/</span>
+  <span>{{ q.title|e }}</span>
+</nav>
+{% endblock %}
+{% block content %}
+<h1>{{ q.title|e }}</h1>
+
+<article class="qa-question">
+  <div class="qa-post">
+    <div class="qa-vote">
+      <div class="score">{{ q.netvotes }}</div>
+      <div class="label">votes</div>
+    </div>
+    <div class="qa-post-main">
+      <div class="qa-post-body">{{ q.body }}</div>
+      {% if q.tags %}
+      <ul class="qa-tags">
+        {% for t in q.tags %}<li><a class="tag-chip" href="{{ root }}tags/{{ t|slug }}.html">{{ t|e }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+      <div class="qa-post-meta">asked by {{ m.who(q.author, q.author_href, root, q.author_avatar) }} on {{ q.created_date }}{% if q.views %} &middot; {{ q.views }} views{% endif %}
+        {% if q.has_accepted %}&middot; <a class="qa-jump" href="{{ q.answers_anchor }}">&#10004; jump to accepted answer</a>{% endif %}
+      </div>
+      {% if q.comments %}
+      <ul class="qa-comments">
+        {% for c in q.comments %}
+        <li class="qa-comment"><div class="qa-post-body">{{ c.body }}</div>
+          <div class="qa-comment-meta">&mdash; {{ m.who(c.author, c.author_href, root) }}, {{ c.created_date }}</div></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+<h2 class="qa-answers-head" id="answers">{{ q.answers|length }} answer{{ '' if q.answers|length == 1 else 's' }}</h2>
+
+{% for a in q.answers %}
+<article class="qa-answer {% if a.accepted %}accepted{% endif %}" id="{{ a.anchor }}">
+  <div class="qa-post">
+    <div class="qa-vote">
+      <div class="score">{{ a.netvotes }}</div>
+      <div class="label">votes</div>
+      {% if a.accepted %}<div class="qa-accepted-badge">&#10004; accepted</div>{% endif %}
+    </div>
+    <div class="qa-post-main">
+      <div class="qa-post-body">{{ a.body }}</div>
+      <div class="qa-post-meta">answered by {{ m.who(a.author, a.author_href, root, a.author_avatar) }} on {{ a.created_date }}</div>
+      {% if a.comments %}
+      <ul class="qa-comments">
+        {% for c in a.comments %}
+        <li class="qa-comment"><div class="qa-post-body">{{ c.body }}</div>
+          <div class="qa-comment-meta">&mdash; {{ m.who(c.author, c.author_href, root) }}, {{ c.created_date }}</div></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</article>
+{% else %}
+<p class="qa-item-meta">No answers were posted to this question.</p>
+{% endfor %}
+{% endblock %}

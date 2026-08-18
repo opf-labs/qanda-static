@@ -1,0 +1,16 @@
+# Packages an already-generated site/ into a self-contained nginx image.
+#
+# The site is NOT in this repo: build it first on a machine that has the database
+# (see build.sh), then build this image from the generated output. The resulting
+# image is the only artefact that carries archive content.
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY site/ /usr/share/nginx/html/
+
+# Fail the build rather than ship an empty archive.
+RUN test -f /usr/share/nginx/html/index.html \
+    && test -d /usr/share/nginx/html/user \
+    || (echo "site/ is missing or incomplete - run build.sh first" && exit 1)
+
+EXPOSE 80

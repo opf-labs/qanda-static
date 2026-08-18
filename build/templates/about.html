@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}About this archive{% endblock %}
+{% block breadcrumbs %}
+<nav class="breadcrumbs">
+  <a href="{{ root }}index.html">Questions</a><span class="bc-sep">/</span>
+  <span>About</span>
+</nav>
+{% endblock %}
+{% block content %}
+<h1>About this archive</h1>
+
+<div class="qa-post-body">
+  <p>This is a static archive of <strong>qanda.digipres.org</strong>, the Open Preservation
+  Foundation community question-and-answer site. The original ran on
+  <a href="https://www.question2answer.org/">Question2Answer</a> 1.6.2, a PHP application first
+  released in 2013.</p>
+
+  <p>As part of decommissioning the legacy server that hosted it, the live application has been
+  replaced by this read-only snapshot rendered directly from the Question2Answer database. It
+  preserves the real community content while removing the software, its attack surface, and the
+  registration spam that had accumulated on the open sign-up form.</p>
+
+  <h2>What is preserved</h2>
+  <ul>
+    <li><strong>{{ site.questions }} questions</strong>, <strong>{{ site.answers }} answers</strong>
+        and <strong>{{ site.comments }} comments</strong>, with their original vote counts, authors and dates.</li>
+    <li><strong>{{ site.tags }} tags</strong>, each with its own index page.</li>
+    <li>Content spanning {{ site.date_range }}.</li>
+  </ul>
+
+  <h2>What is not included</h2>
+  <ul>
+    <li>User accounts, email addresses and passwords. The source database held tens of thousands of
+        spam registrations against a small number of genuine contributors; none of that account data
+        is published here. Profile pictures are stored as copies alongside the archive, so no page
+        discloses your email address or its hashed form to anyone.</li>
+    <li>Voting, answering, commenting and any other interactive feature. This is a fixed snapshot.</li>
+  </ul>
+
+  <h2>Removing your picture</h2>
+  <p>Profile pictures are reproduced from the original site. If you would like yours removed,
+  email <a href="mailto:info@openpreservation.org">info@openpreservation.org</a> and we will take
+  it out at the next update. The same applies to any other image or content of yours in this
+  archive.</p>
+
+  <h2>Asking new questions</h2>
+  <p>The community has moved on from the standalone Q&amp;A. To ask new questions or continue a
+  discussion, use the <a href="https://github.com/openpreserve">OPF organisation on GitHub</a> or the
+  <a href="https://openpreservation.org/">Open Preservation Foundation website</a>.</p>
+
+  <p class="qa-item-meta">Archived {{ site.archived }}. Nothing here has been edited since capture.</p>
+</div>
+{% endblock %}

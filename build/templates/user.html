@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ profile.handle|e }}{% endblock %}
+{% block breadcrumbs %}
+<nav class="breadcrumbs">
+  <a href="{{ root }}index.html">Questions</a><span class="bc-sep">/</span>
+  <span>Users</span><span class="bc-sep">/</span>
+  <span>{{ profile.handle|e }}</span>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="profile-head">
+  {% if profile.avatar %}<img class="avatar avatar-lg" src="{{ root }}{{ profile.avatar }}" alt="{{ profile.handle|e }}" width="88" height="88">{% endif %}
+  <div class="profile-headtext">
+  <h1>{{ profile.handle|e }}</h1>
+  <ul class="profile-stats">
+    <li><b>{{ profile.points }}</b> points</li>
+    <li><b>{{ profile.questions|length }}</b> questions</li>
+    <li><b>{{ profile.answers|length }}</b> answers</li>
+    {% if profile.comments %}<li><b>{{ profile.comments }}</b> comments</li>{% endif %}
+    {% if profile.joined %}<li>member since {{ profile.joined }}</li>{% endif %}
+  </ul>
+  </div>
+</div>
+
+<h2 class="qa-answers-head">Questions ({{ profile.questions|length }})</h2>
+{% if profile.questions %}
+<ul class="qa-list">
+  {% for q in profile.questions %}
+  {{ m.qrow(q, root) }}
+  {% endfor %}
+</ul>
+{% else %}
+<p class="qa-item-meta">No questions.</p>
+{% endif %}
+
+<h2 class="qa-answers-head">Answers ({{ profile.answers|length }})</h2>
+{% if profile.answers %}
+<ul class="qa-list">
+  {% for a in profile.answers %}
+  <li class="qa-item">
+    <div class="qa-item-stats">
+      <span class="qa-stat {% if a.accepted %}answered{% endif %}"><b>{{ a.netvotes }}</b>votes</span>
+    </div>
+    <div class="qa-item-main">
+      <div class="qa-item-title">
+        <a href="{{ root }}{{ a.question.url }}#{{ a.anchor }}">{{ a.question.title|e }}</a>
+        {% if a.accepted %}<span class="qa-accepted-inline">&#10004; accepted</span>{% endif %}
+      </div>
+      <div class="qa-item-meta">answered on {{ a.created_date }}</div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="qa-item-meta">No answers.</p>
+{% endif %}
+{% endblock %}

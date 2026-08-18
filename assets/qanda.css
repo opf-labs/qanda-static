@@ -1,0 +1,198 @@
+/* ===================================================================== OPF chrome
+   Banner and footer lifted from the wiki-static / cairn-standards stack so this
+   archive sits alongside OPF's other properties. Brand: purple #43318f, pink
+   #d5107c. Logo bundled under _assets/opf. */
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       line-height: 1.6; background: #fff; color: #1a1a1a; }
+a { color: #43318f; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* --- Powered by OPF bar --- */
+.opf-bar { background: #43318f url("opf/opf-banner-bg.jpg") center / cover no-repeat; }
+.opf-bar .wrap { padding-top: 0; padding-bottom: 0; }
+.opf-bar-inner { display: flex; align-items: center; gap: 14px; min-height: 84px;
+                 color: #fff; text-decoration: none; }
+.opf-bar-logo { height: 60px; width: auto; display: block; }
+.opf-bar-text { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.28); }
+
+/* --- footer --- */
+.opf-footer { background: #343a40; color: #f8f9fa; font-size: 0.9rem; margin-top: 3rem; }
+.opf-footer a { color: #ced4da; }
+.opf-footer a:hover { color: #fff; }
+.opf-footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px;
+                   padding-top: 44px; padding-bottom: 22px; align-items: start; }
+.opf-foot-col p { margin: 0 0 10px; }
+.opf-foot-licence { text-align: center; align-self: center; color: #adb5bd; }
+.opf-foot-brand { text-align: right; }
+.opf-foot-logo { height: 56px; width: auto; margin-bottom: 12px; }
+.opf-foot-links { list-style: none; padding: 0; margin: 12px 0 0; display: flex;
+                  flex-wrap: wrap; gap: 18px; }
+.opf-foot-contact .opf-foot-links { justify-content: flex-start; }
+.opf-foot-brand .opf-foot-links { justify-content: flex-end; }
+.opf-foot-links a { text-decoration: underline; }
+.opf-social { list-style: none; padding: 0; margin: 4px 0 0; display: flex; gap: 16px;
+              justify-content: flex-end; }
+.opf-social a { display: inline-flex; color: #f8f9fa; }
+.opf-social a:hover { color: #d5107c; }
+.opf-icon { width: 20px; height: 20px; fill: currentColor; display: block; }
+.opf-colophon { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+                padding-top: 16px; padding-bottom: 26px;
+                border-top: 1px solid rgba(255,255,255,0.12);
+                color: #adb5bd; font-size: 0.82rem; }
+.opf-colophon a { color: #ced4da; }
+
+/* --- archive menu bar --- */
+.qa-bar { background: #fff; border-bottom: 1px solid #e3e5e8; position: sticky; top: 0; z-index: 10; }
+.qa-bar-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+                padding-top: 12px; padding-bottom: 10px; }
+.qa-brand { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; }
+.qa-brand-name { font-weight: 800; font-size: 1.1rem; letter-spacing: 0.02em; }
+.qa-badge { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 3px 8px; border-radius: 999px; background: #43318f; color: #fff; }
+.qa-nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.qa-nav a { color: #43318f; text-decoration: none; font-weight: 600; font-size: 0.92rem; }
+.qa-nav a:hover { text-decoration: underline; }
+.qa-actions { margin-left: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+.qa-action { font-size: 0.85rem; text-decoration: none; border: 1px solid #d5107c; color: #d5107c;
+             border-radius: 999px; padding: 4px 12px; white-space: nowrap; }
+.qa-action:hover { background: #d5107c; color: #fff; }
+.qa-stats { padding-bottom: 10px; color: #6b7280; font-size: 0.8rem; }
+
+/* --- static-copy banner --- */
+.qa-notice { background: #fff8e1; border: 1px solid #e6c34a; border-radius: 6px;
+             padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; }
+.qa-notice strong { color: #7a5c00; }
+.qa-notice a { color: #43318f; }
+
+/* --- content shell --- */
+.qa-shell { max-width: 1200px; margin: 0 auto; padding: 2rem 32px; }
+.qa-shell h1 { line-height: 1.25; margin: 0 0 0.5rem; }
+.breadcrumbs { font-size: 0.82rem; color: #6b7280; margin-bottom: 1rem; display: flex;
+               flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+.breadcrumbs a { color: #43318f; text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; }
+.bc-sep { color: #9ca3af; }
+
+/* --- question list (index / tag pages) --- */
+.qa-list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.qa-item { display: flex; gap: 16px; padding: 16px 0; border-top: 1px solid #eceef1; }
+.qa-item-stats { flex: 0 0 5.5rem; display: flex; flex-direction: column; gap: 6px;
+                 text-align: right; color: #6b7280; font-size: 0.8rem; }
+.qa-stat { display: block; }
+.qa-stat b { display: block; font-size: 1.05rem; color: #1a1a1a; font-weight: 700; line-height: 1.1; }
+.qa-stat.answered b { color: #1a7f37; }
+a.qa-stat-link { text-decoration: none; color: inherit; border-radius: 6px; }
+a.qa-stat-link:hover { background: rgba(67,49,143,0.08); }
+a.qa-stat-link.answered { color: #1a7f37; }
+.qa-item-main { flex: 1 1 auto; min-width: 0; }
+.qa-item-title { font-size: 1.08rem; font-weight: 600; margin: 0 0 4px; }
+.qa-item-title a { text-decoration: none; }
+.qa-item-title a:hover { text-decoration: underline; }
+.qa-item-meta { color: #6b7280; font-size: 0.82rem; }
+.qa-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 8px 0 0; }
+.tag-chip { display: inline-block; background: rgba(67,49,143,0.1); color: #43318f; border-radius: 999px;
+            padding: 0.1rem 0.55rem; font-size: 0.76rem; text-decoration: none; white-space: nowrap; }
+.tag-chip:hover { background: rgba(67,49,143,0.22); }
+
+/* --- single question page --- */
+.qa-post { display: flex; gap: 18px; padding: 20px 0; border-top: 1px solid #eceef1; }
+.qa-vote { flex: 0 0 3.2rem; text-align: center; color: #6b7280; }
+.qa-vote .score { font-size: 1.4rem; font-weight: 800; color: #1a1a1a; line-height: 1.1; }
+.qa-vote .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.qa-accepted-badge { color: #1a7f37; font-size: 0.72rem; font-weight: 700; margin-top: 8px; }
+.qa-post-main { flex: 1 1 auto; min-width: 0; }
+.qa-post-body { overflow-wrap: break-word; }
+.qa-post-body p:first-child { margin-top: 0; }
+.qa-post-body img { max-width: 100%; height: auto; }
+.qa-post-body pre { background: #f5f5f5; padding: 0.75rem; overflow-x: auto; border-radius: 4px; }
+.qa-post-body code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.qa-post-body table { border-collapse: collapse; max-width: 100%; }
+.qa-post-body td, .qa-post-body th { border: 1px solid #ccc; padding: 0.35rem 0.6rem; }
+.qa-post-meta { margin-top: 12px; font-size: 0.82rem; color: #6b7280;
+                background: rgba(67,49,143,0.05); border-radius: 6px; padding: 8px 12px;
+                display: inline-block; }
+.qa-post-meta .who { color: #43318f; font-weight: 600; }
+.qa-answers-head { margin: 2rem 0 0; font-size: 1.2rem; }
+.qa-answer.accepted { background: rgba(26,127,55,0.06); border-radius: 8px; }
+.qa-answer.accepted .qa-post { border-top-color: transparent; }
+.qa-comments { margin: 6px 0 0 0; padding: 0 0 0 12px; border-left: 3px solid #eceef1; list-style: none; }
+.qa-comment { font-size: 0.88rem; color: #374151; padding: 8px 0; border-bottom: 1px solid #f1f2f4; }
+.qa-comment:last-child { border-bottom: none; }
+.qa-comment .who { color: #43318f; font-weight: 600; }
+.qa-comment-meta { color: #9ca3af; font-size: 0.78rem; }
+
+/* anchored answers should clear the sticky menu bar */
+.qa-answer, #answers { scroll-margin-top: 90px; }
+a.who { text-decoration: none; }
+a.who:hover { text-decoration: underline; }
+.qa-jump { color: #1a7f37; text-decoration: none; font-weight: 600; }
+.qa-jump:hover { text-decoration: underline; }
+
+/* --- avatars --- */
+.avatar { border-radius: 50%; object-fit: cover; background: rgba(67,49,143,0.1);
+          display: inline-block; }
+.avatar-sm { width: 22px; height: 22px; vertical-align: text-bottom; margin-right: 5px; }
+.avatar-lg { width: 88px; height: 88px; flex: 0 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+
+/* --- user profile --- */
+.profile-head { display: flex; gap: 20px; align-items: center;
+                border-bottom: 1px solid #eceef1; padding-bottom: 1rem; margin-bottom: 0.5rem; }
+.profile-head h1 { margin: 0 0 0.5rem; }
+.profile-stats { list-style: none; display: flex; flex-wrap: wrap; gap: 1.4rem;
+                 padding: 0; margin: 0; color: #6b7280; font-size: 0.9rem; }
+.profile-stats b { color: #43318f; font-size: 1.1rem; }
+.qa-accepted-inline { color: #1a7f37; font-size: 0.78rem; font-weight: 700; margin-left: 8px; }
+
+/* --- tag index --- */
+.tagcloud { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+.tagcloud a { display: inline-flex; align-items: baseline; gap: 6px; background: rgba(67,49,143,0.08);
+              color: #43318f; border-radius: 999px; padding: 0.3rem 0.7rem; text-decoration: none; }
+.tagcloud a:hover { background: rgba(67,49,143,0.2); }
+.tagcloud .count { color: #6b7280; font-size: 0.8rem; }
+
+/* --- client-side filter on index --- */
+.qa-filter { margin: 1.5rem 0 0; padding: 1rem; background: #f8f9fa; border-radius: 6px; }
+.qa-filter input { width: 100%; padding: 0.5rem 0.7rem; border: 1px solid #ccc; border-radius: 4px;
+                   font-size: 0.95rem; }
+.qa-filter-count { font-size: 0.82rem; color: #6b7280; margin-top: 0.5rem; }
+
+@media (max-width: 720px) {
+  .opf-footer-grid { grid-template-columns: 1fr; gap: 22px; text-align: center; }
+  .opf-foot-brand, .opf-foot-licence { text-align: center; }
+  .opf-foot-contact .opf-foot-links, .opf-foot-brand .opf-foot-links, .opf-social { justify-content: center; }
+  .opf-colophon { justify-content: center; text-align: center; }
+  .qa-actions { margin-left: 0; }
+  .wrap, .qa-shell { padding-left: 16px; padding-right: 16px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #14161a; color: #e6e6e6; }
+  a { color: #b9a7ff; }
+  .qa-bar { background: #14161a; border-bottom-color: #2a2f36; }
+  .qa-nav a { color: #b9a7ff; }
+  .qa-badge { background: #5b45b8; }
+  .qa-action { border-color: #ff5fae; color: #ff5fae; }
+  .qa-action:hover { background: #ff5fae; color: #14161a; }
+  .qa-item, .qa-post { border-top-color: #2a2f36; }
+  .profile-head { border-bottom-color: #2a2f36; }
+  .profile-stats b { color: #b9a7ff; }
+  a.qa-stat-link:hover { background: rgba(91,69,184,0.2); }
+  .qa-notice { background: #2b2410; border-color: #6b5a1f; }
+  .qa-notice strong { color: #e6c34a; }
+  .qa-notice a, .breadcrumbs a { color: #b9a7ff; }
+  .qa-stat b, .qa-vote .score { color: #e6e6e6; }
+  .qa-post-body pre { background: #1e2127; }
+  .qa-post-body td, .qa-post-body th { border-color: #3a3f47; }
+  .qa-post-meta { background: rgba(91,69,184,0.15); color: #9ca3af; }
+  .qa-post-meta .who, .qa-comment .who { color: #b9a7ff; }
+  .qa-answer.accepted { background: rgba(26,127,55,0.12); }
+  .qa-filter { background: #1e2127; }
+  .qa-filter input { background: #14161a; color: #e6e6e6; border-color: #3a3f47; }
+  .tag-chip, .tagcloud a { background: rgba(91,69,184,0.28); color: #b9a7ff; }
+  /* Neutralise inline colours pasted from the old rich-text editor: light-mode
+     colours on a dark body are otherwise unreadable. */
+  .qa-post-body [style] { color: inherit !important; background-color: transparent !important; }
+}

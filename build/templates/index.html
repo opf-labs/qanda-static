@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}All questions{% endblock %}
+{% block content %}
+<h1>Community questions</h1>
+<p class="qa-item-meta">{{ questions|length }} questions preserved from the OPF digital-preservation Q&amp;A, newest first.</p>
+
+<div class="qa-filter">
+  <input type="search" id="q-filter" placeholder="Filter questions by title or tag&hellip;" autocomplete="off" aria-label="Filter questions">
+  <div class="qa-filter-count" id="q-filter-count"></div>
+</div>
+
+<ul class="qa-list" id="q-list">
+  {% for q in questions %}
+  {{ m.qrow(q, root, search=true) }}
+  {% endfor %}
+</ul>
+
+<script>
+(function () {
+  var input = document.getElementById('q-filter');
+  var items = Array.prototype.slice.call(document.querySelectorAll('#q-list .qa-item'));
+  var count = document.getElementById('q-filter-count');
+  function apply() {
+    var term = input.value.trim().toLowerCase();
+    var shown = 0;
+    items.forEach(function (li) {
+      var match = !term || li.getAttribute('data-search').indexOf(term) !== -1;
+      li.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+    count.textContent = term ? (shown + ' of ' + items.length + ' questions') : '';
+  }
+  input.addEventListener('input', apply);
+})();
+</script>
+{% endblock %}

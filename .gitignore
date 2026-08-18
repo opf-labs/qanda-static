@@ -1,0 +1,27 @@
+# --- content and private data: never in the repo, only on the build server ---
+# The database dump holds every contributor's email address and password material.
+qanda-*.sql.gz
+qanda-*.sql.gz.sha256
+*.sql
+*.sql.gz
+# ...except the synthetic CI fixture, which contains no real data.
+!tests/fixture.sql
+
+# Generated site. Deliberately not committed: a removal request is honoured by
+# rebuilding, and content in git history could never be withdrawn.
+site/
+site-test/
+
+# Derived personal data captured from the database at build time.
+assets/avatars/*
+!assets/avatars/removed.txt.example
+assets/media/*
+
+# Local secrets and the live removal list (names people who asked to be removed).
+.env
+removed.txt
+
+# --- python ---
+__pycache__/
+*.pyc
+.venv/

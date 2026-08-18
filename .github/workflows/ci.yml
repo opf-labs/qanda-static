@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Tests (synthetic fixture)
+    runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -uroot -proot --silent"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+
+    env:
+      QA_DB_HOST: 127.0.0.1
+      QA_DB_PORT: "3307"
+      QA_DB_USER: root
+      QA_DB_PASSWORD: root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r build/requirements.txt -r tests/requirements.txt
+
+      - name: Unit tests
+        run: pytest tests/test_units.py -v
+
+      - name: End-to-end build against the fixture database
+        run: pytest tests/test_build.py -v
+
+  image:
+    name: Serving image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the generator image
+        run: docker build -f build/Dockerfile -t qanda-generate:ci .
+
+      - name: Serving image refuses an empty site
+        run: |
+          # No site/ in the repo by design, so this build must fail loudly rather
+          # than publish an empty archive.
+          if docker build -f Dockerfile.serve -t qanda-serve:ci . 2>/dev/null; then
+            echo "::error::Dockerfile.serve built without a generated site"
+            exit 1
+          fi
+          echo "Correctly refused to build without site/"

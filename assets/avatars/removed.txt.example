@@ -1,0 +1,15 @@
+# EXAMPLE FILE. Copy to removed.txt on the build server (removed.txt is gitignored,
+# because it names people who exercised a privacy request).
+#
+# Contributors who have asked for their profile picture to be removed.
+#
+# One entry per line: either the numeric userid or the handle, case-insensitive.
+# "#" starts a comment. Both build/extract_media.py (never fetch) and
+# build/generate.py (never render) read this file, so an entry here keeps the
+# picture out of the archive permanently, including after future rebuilds.
+#
+# Requests come to info@openpreservation.org. See the "Handling a removal
+# request" section of README.md for the full procedure.
+#
+# Example:
+#   todrobbins        # requested 2026-08-18

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Questions tagged {{ tag|e }}{% endblock %}
+{% block breadcrumbs %}
+<nav class="breadcrumbs">
+  <a href="{{ root }}index.html">Questions</a><span class="bc-sep">/</span>
+  <a href="{{ root }}tags/index.html">Tags</a><span class="bc-sep">/</span>
+  <span>{{ tag|e }}</span>
+</nav>
+{% endblock %}
+{% block content %}
+<h1>Questions tagged <span class="tag-chip">{{ tag|e }}</span></h1>
+<p class="qa-item-meta">{{ questions|length }} question{{ '' if questions|length == 1 else 's' }}.</p>
+
+<ul class="qa-list">
+  {% for q in questions %}
+  {{ m.qrow(q, root) }}
+  {% endfor %}
+</ul>
+{% endblock %}

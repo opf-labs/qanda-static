@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}All tags{% endblock %}
+{% block breadcrumbs %}
+<nav class="breadcrumbs">
+  <a href="{{ root }}index.html">Questions</a><span class="bc-sep">/</span>
+  <span>Tags</span>
+</nav>
+{% endblock %}
+{% block content %}
+<h1>Tags</h1>
+<p class="qa-item-meta">{{ tags|length }} tags used across the archive.</p>
+<div class="tagcloud">
+  {% for t in tags %}
+  <a href="{{ root }}tags/{{ t.slug }}.html">{{ t.name|e }} <span class="count">{{ t.count }}</span></a>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% macro who(author, href, root, avatar=none) -%}
+{% if avatar %}<img class="avatar avatar-sm" src="{{ root }}{{ avatar }}" alt="" width="22" height="22" loading="lazy">{% endif %}{% if href %}<a class="who" href="{{ root }}{{ href }}">{{ author|e }}</a>{% else %}<span class="who">{{ author|e }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro qrow(q, root, search=false) -%}
+<li class="qa-item"{% if search %} data-search="{{ (q.title ~ ' ' ~ (q.tags|join(' ')))|lower|e }}"{% endif %}>
+  <div class="qa-item-stats">
+    <span class="qa-stat"><b>{{ q.netvotes }}</b>votes</span>
+    <a class="qa-stat qa-stat-link {% if q.has_accepted %}answered{% endif %}"
+       href="{{ root }}{{ q.url }}{{ q.answers_anchor }}"
+       title="{% if q.has_accepted %}Jump to the accepted answer{% else %}Go to the answers{% endif %}"><b>{{ q.acount }}</b>answers</a>
+    <span class="qa-stat"><b>{{ q.views }}</b>views</span>
+  </div>
+  <div class="qa-item-main">
+    <div class="qa-item-title"><a href="{{ root }}{{ q.url }}">{{ q.title|e }}</a></div>
+    <div class="qa-item-meta">asked by {{ who(q.author, q.author_href, root, q.author_avatar) }} on {{ q.created_date }}</div>
+    {% if q.tags %}
+    <ul class="qa-tags">
+      {% for t in q.tags %}<li><a class="tag-chip" href="{{ root }}tags/{{ t|slug }}.html">{{ t|e }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</li>
+{%- endmacro %}
